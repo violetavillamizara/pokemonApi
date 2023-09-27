@@ -60,7 +60,9 @@ function createPokemon(pokemon) {
   flipCard.appendChild(cardContainer);
 
   const cardBack = document.createElement("div");
-  cardBack.classList.add("pokemon-block-back");
+  cardBack.classList.add("pokemon-back");
+
+  cardBack.appendChild(progressBars(pokemon.stats));
 
   cardContainer.appendChild(card);
   cardContainer.appendChild(cardBack);
@@ -68,6 +70,9 @@ function createPokemon(pokemon) {
 }
 
 
+
+let btnPrevious=document.querySelector("#previous");
+btnPrevious.style.display='none'
 
 previous.addEventListener("click", () => {
   if (offset != 1) {
@@ -79,9 +84,14 @@ previous.addEventListener("click", () => {
 
 next.addEventListener("click", () => {
   offset += 9;
+  show();
   removeChildNodes(pokemonContainer);
   fetchPokemons(offset, limit);
 });
+
+function show(){
+  btnPrevious.style.display = 'block';
+}
 
 function removeChildNodes(parent) {
   while (parent.firstChild) {
