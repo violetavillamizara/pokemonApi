@@ -98,21 +98,26 @@ function progressBars(stats) {
   return statsContainer;
 }
 
-const statsContainer = document.createElement("div");
-statsContainer.classList.add("stats-container");
-statsContainer.addEventListener("click", ()=>{
-  Swal.fire({
-    title: pokemon.name,
-    icon: 'info',
-    input: 'range',
-    inputLabel: pokemon.stats,
-    inputAttributes: {
-      min: 0,
-      max: 100,
-      step: 1
-    },
-    inputValue: stat.base_stat
-  })
+document.addEventListener("click",(e)=>{
+  console.log(e.target);
+  if(e.target.matches(".flip-card, .stats-container *")){
+    Swal.fire({
+      title: "pokemon.name",
+      icon: 'info',
+      input: 'range',
+      inputLabel:" pokemon.stats",
+      inputAttributes: {
+        min: 0,
+        max: 100,
+        step: 1
+      },
+      html:`
+      
+      `
+      //inputValue: "stat.base_stat"
+    })
+  }
+})
 //   Swal.fire({
 //     title: `${pokemon.name}`,
 //     text: 'Modal with a custom image.',
@@ -136,11 +141,7 @@ statsContainer.addEventListener("click", ()=>{
 //     cancelButtonText: 'Enviar',
 //     showCancelButton: true,
 //     showCloseButton: true,
-//     imageWidth: "80%",
-//     imageHeight: "80%",
-// });
-});
-
+//});
 
 let btnPrevious=document.querySelector("#previous");
 btnPrevious.style.display='none'
