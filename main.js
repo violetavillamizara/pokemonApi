@@ -98,6 +98,50 @@ function progressBars(stats) {
   return statsContainer;
 }
 
+const statsContainer = document.createElement("div");
+statsContainer.classList.add("stats-container");
+statsContainer.addEventListener("click", ()=>{
+  Swal.fire({
+    title: pokemon.name,
+    icon: 'info',
+    input: 'range',
+    inputLabel: pokemon.stats,
+    inputAttributes: {
+      min: 0,
+      max: 100,
+      step: 1
+    },
+    inputValue: stat.base_stat
+  })
+//   Swal.fire({
+//     title: `${pokemon.name}`,
+//     text: 'Modal with a custom image.',
+//     imageUrl: `${pokemon.sprites.other.dream_world.front_default}`,
+//     // imageUrl:  `${(img) ?  img : defaultImg}`,
+//     html: `
+//         ${pokemon.stats.map(data=>`
+//         <div>
+//             <input 
+//                 type="range" 
+//                 value=${data.base_stat}
+//                 max="200" id="${data.stat.name}"/>
+//             <label data-name=${data.stat.name}> 
+//                 <b>${data.base_stat}</b> 
+//                 ${data.stat.name}
+//             </label>
+//         </div>
+//         `).join("")}   
+//     `,
+//     confirmButtonText: 'OK',
+//     cancelButtonText: 'Enviar',
+//     showCancelButton: true,
+//     showCloseButton: true,
+//     imageWidth: "80%",
+//     imageHeight: "80%",
+// });
+});
+
+
 let btnPrevious=document.querySelector("#previous");
 btnPrevious.style.display='none'
 
