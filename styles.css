@@ -80,3 +80,13 @@ body {
     grid-template-columns: 1fr 2fr;
     text-align: left;
   }
+
+  button{
+    background-color: purple;
+    border-style: none;
+    border-radius: 30px;
+  }
+
+  button:hover{
+    color: fuchsia;
+  }
