@@ -17,15 +17,6 @@ function fetchPokemons(offset, limit) {
   }
 }
 
-function fetchAllPokemons() {
-  const totalPokemons = 898;
-
-  for (let i = 1; i <= totalPokemons; i++) {
-    traerPokemon(i);
-  }
-}
-
-
 function createPokemon(pokemon) {
   //crear divs y asignar clases
   const card = document.createElement("div");
@@ -136,4 +127,19 @@ function removeChildNodes(parent) {
 }
 
 fetchPokemons(offset, limit);
-  
+
+//buscar
+const input = document.querySelector('#nombre');
+const boton = document.querySelector('#buscar');
+
+boton.addEventListener('click', () => {
+  const pokemonName = input.value.toLowerCase();
+    buscarName(pokemonName);
+
+});
+
+async function buscarName(name) {
+  const response = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)).json();
+  removeChildNodes(pokemonContainer);
+  createPokemon(response);
+}
