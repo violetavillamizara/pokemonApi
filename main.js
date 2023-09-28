@@ -1,9 +1,10 @@
 const pokemonContainer = document.querySelector(".pokemon-container");
 const previous = document.querySelector("#previous");
 const next = document.querySelector("#next");
+let data;
 
 async function traerPokemon(id) {
-  const data = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)).json();
+  data = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)).json();
   createPokemon(data);
 }
 
@@ -47,11 +48,13 @@ function createPokemon(pokemon) {
   // card container
   const flipCard = document.createElement("div");
   flipCard.classList.add("flip-card");
+  flipCard.dataset.name = pokemon.name;
 
   flipCard.appendChild(cardContainer);
 
   const cardBack = document.createElement("div");
   cardBack.classList.add("pokemon-back");
+  cardBack.dataset.name = pokemon.name;
 
   cardBack.appendChild(progressBars(pokemon.stats));
 
@@ -64,6 +67,7 @@ function createPokemon(pokemon) {
 function progressBars(stats) {
   const statsContainer = document.createElement("div");
   statsContainer.classList.add("stats-container");
+  statsContainer.dataset.name = data.name;
 
   for (let i = 0; i < 6; i++) {
     const stat = stats[i];
@@ -71,15 +75,19 @@ function progressBars(stats) {
     const statPercent = stat.base_stat / 2 + "%";
     const statContainer = document.createElement("stat-container");
     statContainer.classList.add("stat-container");
+    statContainer.dataset.name = data.name;
 
     const statName = document.createElement("p");
+    statName.dataset.name = data.name;
     statName.textContent = stat.stat.name;
 
     const progress = document.createElement("div");
     progress.classList.add("progress");
+    progress.dataset.name = data.name;
 
     const progressBar = document.createElement("div");
     progressBar.classList.add("progress-bar");
+    progressBar.dataset.name = data.name;
     progressBar.setAttribute("aria-valuenow", stat.base_stat);
     progressBar.setAttribute("aria-valuemin", 0);
     progressBar.setAttribute("aria-valuemax", 200);
@@ -98,50 +106,28 @@ function progressBars(stats) {
   return statsContainer;
 }
 
-document.addEventListener("click",(e)=>{
-  console.log(e.target);
+document.addEventListener("click",async (e)=>{
   if(e.target.matches(".flip-card, .stats-container *")){
+    console.log(e.target.dataset.name);
+    let namePokemon = e.target.dataset.name;
+    let data = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${namePokemon}`)).json();
+    console.log(data);
     Swal.fire({
-      title: "pokemon.name",
-      icon: 'info',
-      input: 'range',
-      inputLabel:" pokemon.stats",
-      inputAttributes: {
-        min: 0,
-        max: 100,
-        step: 1
-      },
-      html:`
-      
-      `
-      //inputValue: "stat.base_stat"
-    })
-  }
+      title: `${data.name}`,
+      html: `
+        ${data.stats.map(d=>`
+        <div>
+          <input type="range" 
+            value=${d.base_stat}
+            max="200" id="${d.stat.name}"/>
+          <label class="text-white" data-name=${d.stat.name}> 
+            <b>${d.base_stat}</b> 
+            ${d.stat.name}
+          </label>
+        </div>`).join("")}`,
+    }
+)}
 })
-//   Swal.fire({
-//     title: `${pokemon.name}`,
-//     text: 'Modal with a custom image.',
-//     imageUrl: `${pokemon.sprites.other.dream_world.front_default}`,
-//     // imageUrl:  `${(img) ?  img : defaultImg}`,
-//     html: `
-//         ${pokemon.stats.map(data=>`
-//         <div>
-//             <input 
-//                 type="range" 
-//                 value=${data.base_stat}
-//                 max="200" id="${data.stat.name}"/>
-//             <label data-name=${data.stat.name}> 
-//                 <b>${data.base_stat}</b> 
-//                 ${data.stat.name}
-//             </label>
-//         </div>
-//         `).join("")}   
-//     `,
-//     confirmButtonText: 'OK',
-//     cancelButtonText: 'Enviar',
-//     showCancelButton: true,
-//     showCloseButton: true,
-//});
 
 let btnPrevious=document.querySelector("#previous");
 btnPrevious.style.display='none'
