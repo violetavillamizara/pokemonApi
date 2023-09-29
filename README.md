@@ -1,7 +1,13 @@
 # Pokédex Web App
 
-![Pokédex](./poke.png)
-![Pokédex](./searchpoke.png)
+![Pokédex](./img/poke.png)
+![Pokédex](./img/searchpoke.png)
+> Para buscar el Pokemón que escribiste: Debes dar click en GO
+![Pokédex](./img/goo.png)
+> Al pararte sobre cada tarjeta girará y te mostrará:
+![Pokédex](./img/backk.png)
+> Si das click en el reverso o frente de la tarjeta:
+![Pokédex](./img/stats.png)
 
 Este es un proyecto de Pokédex web que te permite explorar y buscar información sobre diferentes Pokémon. Puedes ver los detalles de cada Pokémon, incluyendo su nombre, número en la Pokédex, estadísticas y más.
 
