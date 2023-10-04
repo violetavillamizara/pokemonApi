@@ -1,4 +1,4 @@
-//const url=
+const url="http://127.0.0.1:5010/stats"
 
 const get=async()=>{
     let config={

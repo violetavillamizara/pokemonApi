@@ -117,17 +117,24 @@ document.addEventListener("click",async (e)=>{
       title: `${data.name}`,
       html: `
         ${data.stats.map(d=>`
-        <div>
-          <input type="range" 
+        <div class="values-container">
+          <input class="pokeInput" type="range" 
             value=${d.base_stat}
             max="200" id="${d.stat.name}"/>
-          <label class="text-white" data-name=${d.stat.name}> 
+          <label id="${d.stat.name}" class="text-white" data-name=${d.stat.name}> 
             <b>${d.base_stat}</b> 
             ${d.stat.name}
           </label>
         </div>`).join("")}`,
+    })
+    const newInputs = document.querySelectorAll(".pokeInput");
+    newInputs.forEach((newInput) => {
+    newInput.addEventListener("input", (e) => {
+    let mystats = e.target.nextElementSibling;
+    mystats.innerHTML = `${e.target.value} ${mystats.dataset.name}`;
     }
-)}
+    )}
+    )}
 })
 
 let btnPrevious=document.querySelector("#previous");
@@ -176,5 +183,22 @@ async function buscarName(name) {
   createPokemon(response);
 }
 
+// document.addEventListener("DOMContentLoaded", () => {
+//   // Función que se llama cuando cambia el valor de un input
+//   function updateValues() {
+//     // Selecciona todos los inputs por su clase
+//     const inputs = document.querySelectorAll('.pokeInput');
+    
+//     // Obtiene los valores de los inputs y los almacena en un array
+//     const values = Array.from(inputs).map(input => input.value);
+    
+//     // Convierte los valores en una cadena y muestra en el div
+//     const valuesContainer = document.querySelector('.values-container');
+//     valuesContainer.textContent = 'Valores: ' + values.join(', ');
+//   }
 
-
+//   // Agrega un evento 'input' a cada input para llamar a la función cuando cambia el valor
+//   const inputs = document.querySelectorAll('.pokeInput');
+//   inputs.forEach(input => {
+//     input.addEventListener('input', updateValues);
+//   });
