@@ -1,4 +1,4 @@
-const url="http://127.0.0.1:5010/stats"
+const url="hhttp://127.0.0.1:5013/stats"
 
 const get=async()=>{
     let config={
@@ -14,8 +14,9 @@ const enviar=async()=>{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
-            "name":"",
-            "stats":[{
+            "stats":[
+                {name:""},
+            {
                 hp:""
             },{
                 attack:""

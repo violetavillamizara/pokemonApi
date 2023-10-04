@@ -1,7 +1,7 @@
 const pokemonContainer = document.querySelector(".pokemon-container");
 const previous = document.querySelector("#previous");
 const next = document.querySelector("#next");
-const mockapi="https://6519c2f0340309952f0cb287.mockapi.io/poke";
+const jsonserver="http://127.0.0.1:5013/stats";
 let data;
 
 async function traerPokemon(id) {
@@ -194,11 +194,3 @@ async function buscarName(name) {
     
 //     // Convierte los valores en una cadena y muestra en el div
 //     const valuesContainer = document.querySelector('.values-container');
-//     valuesContainer.textContent = 'Valores: ' + values.join(', ');
-//   }
-
-//   // Agrega un evento 'input' a cada input para llamar a la función cuando cambia el valor
-//   const inputs = document.querySelectorAll('.pokeInput');
-//   inputs.forEach(input => {
-//     input.addEventListener('input', updateValues);
-//   });
